@@ -1,0 +1,38 @@
+management:
+  security:  
+   enabled: false      
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+       include: '*'
+    web:
+     exposure:
+      include: '*'
+      base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+      enabled-by-default: 'false'
+
+
+resilience4j.circuitbreaker:
+    backends:
+        backendService:
+            registerHealthIndicator: true
+            ringBufferSizeInClosedState: 5
+            ringBufferSizeInHalfOpenState: 3
+            waitInterval: 5000
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+           
+
+
+server:
+    port: 2018
+    
+spring:
+  application:
+    name: frontend
